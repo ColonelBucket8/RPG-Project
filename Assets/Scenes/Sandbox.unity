@@ -1019,7 +1019,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1100523503, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: m_Speed
-      value: 7
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1100523503, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: m_Acceleration
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1060148680574738817, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: target
