@@ -18,19 +18,20 @@ namespace RPG.Combat
 
         private void Update()
         {
-            if (target != null)
+            if (target == null)
             {
-                float distance = Vector3.Distance(transform.position, target.position);
+                return;
+            }
 
-                if (distance < weaponRange)
-                {
-                    mover.Stop();
-                }
-                else
-                {
-                    mover.MoveTo(target.position);
-                }
+            float distance = Vector3.Distance(transform.position, target.position);
 
+            if (distance < weaponRange)
+            {
+                mover.Stop();
+            }
+            else
+            {
+                mover.MoveTo(target.position);
             }
 
         }
@@ -38,6 +39,14 @@ namespace RPG.Combat
         public void Attack(CombatTarget combatTarget)
         {
             target = combatTarget.transform;
+        }
+
+        /// <summary>
+        /// Cancel and stop attacking
+        /// </summary>
+        public void Cancel()
+        {
+            target = null;
         }
     }
 }
