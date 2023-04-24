@@ -1,31 +1,34 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mover : MonoBehaviour
+namespace RPG.Movement
 {
-    [SerializeField] Transform target;
-
-    void Update()
+    public class Mover : MonoBehaviour
     {
-        UpdateAnimator();
-    }
+        [SerializeField] Transform target;
 
-    private void UpdateAnimator()
-    {
-        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+        void Update()
+        {
+            UpdateAnimator();
+        }
 
-        // Animator is only interested in z velocity, moving forward
-        // The global value is not useful for the animator
-        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+        private void UpdateAnimator()
+        {
+            Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
 
-        float speed = localVelocity.z;
-        GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+            // Animator is only interested in z velocity, moving forward
+            // The global value is not useful for the animator
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
 
-    }
+            float speed = localVelocity.z;
+            GetComponent<Animator>().SetFloat("forwardSpeed", speed);
+
+        }
 
 
-    public void MoveTo(Vector3 destination)
-    {
-        GetComponent<NavMeshAgent>().destination = destination;
+        public void MoveTo(Vector3 destination)
+        {
+            GetComponent<NavMeshAgent>().destination = destination;
+        }
     }
 }
