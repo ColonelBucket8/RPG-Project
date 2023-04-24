@@ -7,6 +7,11 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
 
+        /// <summary>
+        /// Handle combat and movement.
+        /// Move the player within the weapon range when clicking on enemy.
+        /// Do nothing when player clicks on unwalkable terrain
+        /// </summary>
         private void Update()
         {
             // Action Priority

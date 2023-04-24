@@ -6,6 +6,12 @@ namespace RPG.Movement
     public class Mover : MonoBehaviour
     {
         [SerializeField] Transform target;
+        NavMeshAgent navMeshAgent;
+
+        private void Start()
+        {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
 
         void Update()
         {
@@ -14,7 +20,7 @@ namespace RPG.Movement
 
         private void UpdateAnimator()
         {
-            Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+            Vector3 velocity = navMeshAgent.velocity;
 
             // Animator is only interested in z velocity, moving forward
             // The global value is not useful for the animator
@@ -25,10 +31,15 @@ namespace RPG.Movement
 
         }
 
+        public void Stop()
+        {
+            navMeshAgent.isStopped = true;
+        }
 
         public void MoveTo(Vector3 destination)
         {
-            GetComponent<NavMeshAgent>().destination = destination;
+            navMeshAgent.destination = destination;
+            navMeshAgent.isStopped = false;
         }
     }
 }
