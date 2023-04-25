@@ -37,7 +37,6 @@ namespace RPG.Movement
             navMeshAgent.isStopped = true;
         }
 
-
         public void MoveTo(Vector3 destination)
         {
             navMeshAgent.destination = destination;
