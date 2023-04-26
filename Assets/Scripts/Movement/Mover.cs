@@ -48,6 +48,10 @@ namespace RPG.Movement
             navMeshAgent.isStopped = false;
         }
 
+        /// <summary>
+        /// Cancel other action and move to the pointed destination
+        /// </summary>
+        /// <param name="destination"></param>
         public void StartMoveAction(Vector3 destination)
         {
             GetComponent<ActionScheduler>().StartAction(this);
