@@ -69,8 +69,11 @@ namespace RPG.Combat
         // Animation Event 
         void Hit()
         {
-            Health healthComponent = target.GetComponent<Health>();
-            healthComponent.TakeDamage(weaponDamage);
+            if (target != null)
+            {
+                Health healthComponent = target.GetComponent<Health>();
+                healthComponent.TakeDamage(weaponDamage);
+            }
         }
     }
 }
