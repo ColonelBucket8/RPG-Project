@@ -7,6 +7,7 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
 
+        Mover mover;
         Fighter fighter;
         /// <summary>
         /// Handle combat and movement.
@@ -16,7 +17,9 @@ namespace RPG.Control
         private void Start()
         {
             fighter = GetComponent<Fighter>();
+            mover = GetComponent<Mover>();
         }
+
         private void Update()
         {
             // Action Priority
@@ -41,7 +44,10 @@ namespace RPG.Control
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
 
-                if (!fighter.CanAttack(target))
+                if (target == null) continue;
+
+
+                if (!fighter.CanAttack(target.gameObject))
                 {
                     continue;
                 }
@@ -49,7 +55,7 @@ namespace RPG.Control
 
                 if (Input.GetMouseButtonDown(0))
                 {
-                    fighter.Attack(target);
+                    fighter.Attack(target.gameObject);
                 }
 
                 // Put return outside to get the value when hovering on the enemy
@@ -67,7 +73,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<Mover>().StartMoveAction(hit.point);
+                    mover.StartMoveAction(hit.point);
                 }
                 return true;
             }

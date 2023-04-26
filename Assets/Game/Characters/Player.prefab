@@ -68,6 +68,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2279450527215681897, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: healthPoints
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 5509177005582210183, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: timeBetweenAttack
       value: 1
@@ -118,6 +122,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7414127415572688892, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414127415572688892, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
