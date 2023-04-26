@@ -1,4 +1,5 @@
 using RPG.Combat;
+using RPG.Core;
 using RPG.Movement;
 using UnityEngine;
 
@@ -9,6 +10,9 @@ namespace RPG.Control
 
         Mover mover;
         Fighter fighter;
+        Health health;
+
+
         /// <summary>
         /// Handle combat and movement.
         /// Move the player within the weapon range when clicking on enemy.
@@ -18,10 +22,13 @@ namespace RPG.Control
         {
             fighter = GetComponent<Fighter>();
             mover = GetComponent<Mover>();
+            health = GetComponent<Health>();
         }
 
         private void Update()
         {
+            if (health.IsDead()) return;
+
             // Action Priority
             if (InteractWithCombat())
             {
@@ -32,8 +39,6 @@ namespace RPG.Control
             {
                 return;
             }
-
-            print("Nothing to do");
         }
 
         private bool InteractWithCombat()

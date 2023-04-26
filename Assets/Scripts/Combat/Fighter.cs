@@ -12,7 +12,9 @@ namespace RPG.Combat
 
         Health target;
         Animator animator;
-        float timeSinceLastAttack = 0f;
+
+        // Enable player to attack immediately if within weapon range
+        float timeSinceLastAttack = Mathf.Infinity;
 
         Mover mover;
 

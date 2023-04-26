@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.AI;
 
-namespace RPG.Combat
+namespace RPG.Core
 {
     public class Health : MonoBehaviour
     {
@@ -9,12 +8,10 @@ namespace RPG.Combat
 
         bool isDead = false;
         CapsuleCollider capsuleCollider;
-        NavMeshAgent navMeshAgent;
 
         private void Start()
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
-            navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         public bool IsDead()
@@ -41,13 +38,17 @@ namespace RPG.Combat
             if (isDead) return;
 
             GetComponent<Animator>().SetTrigger("die");
+            GetComponent<ActionScheduler>().CancelCurrentAction();
+
             isDead = true;
 
-            capsuleCollider.enabled = false;
+            // Player doesn't have capsule collider component
+            // Capsule collider is attached to enemy for ray cast
+            if (capsuleCollider != null)
+            {
+                capsuleCollider.enabled = false;
+            }
 
-            // Enable to pass through dead body without deactivating navMeshAgent
-            // which can cause null reference invoked by other methods
-            navMeshAgent.radius = 0f;
         }
     }
 }
