@@ -7,11 +7,16 @@ namespace RPG.Control
     public class PlayerController : MonoBehaviour
     {
 
+        Fighter fighter;
         /// <summary>
         /// Handle combat and movement.
         /// Move the player within the weapon range when clicking on enemy.
         /// Do nothing when player clicks on unwalkable terrain
         /// </summary>
+        private void Start()
+        {
+            fighter = GetComponent<Fighter>();
+        }
         private void Update()
         {
             // Action Priority
@@ -36,14 +41,15 @@ namespace RPG.Control
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
 
-                if (!target)
+                if (!fighter.CanAttack(target))
                 {
                     continue;
                 }
 
+
                 if (Input.GetMouseButtonDown(0))
                 {
-                    GetComponent<Fighter>().Attack(target);
+                    fighter.Attack(target);
                 }
 
                 // Put return outside to get the value when hovering on the enemy

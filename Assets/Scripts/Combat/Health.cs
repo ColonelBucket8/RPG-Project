@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace RPG.Combat
 {
@@ -7,6 +8,14 @@ namespace RPG.Combat
         [SerializeField] float healthPoints = 20f;
 
         bool isDead = false;
+        CapsuleCollider capsuleCollider;
+        NavMeshAgent navMeshAgent;
+
+        private void Start()
+        {
+            capsuleCollider = GetComponent<CapsuleCollider>();
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
 
         public bool IsDead()
         {
@@ -33,6 +42,8 @@ namespace RPG.Combat
 
             GetComponent<Animator>().SetTrigger("die");
             isDead = true;
+            capsuleCollider.enabled = false;
+            navMeshAgent.enabled = false;
         }
     }
 }
