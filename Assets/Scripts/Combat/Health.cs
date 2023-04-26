@@ -42,8 +42,12 @@ namespace RPG.Combat
 
             GetComponent<Animator>().SetTrigger("die");
             isDead = true;
+
             capsuleCollider.enabled = false;
-            navMeshAgent.enabled = false;
+
+            // Enable to pass through dead body without deactivating navMeshAgent
+            // which can cause null reference invoked by other methods
+            navMeshAgent.radius = 0f;
         }
     }
 }
