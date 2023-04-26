@@ -17,8 +17,6 @@ namespace RPG.Control
             fighter = GetComponent<Fighter>();
             player = GameObject.FindWithTag("Player");
             health = GetComponent<Health>();
-
-
         }
 
         private void Update()
@@ -39,6 +37,13 @@ namespace RPG.Control
         private float DistanceToPlayer()
         {
             return Vector3.Distance(transform.position, player.transform.position);
+        }
+
+        // Called by Unity
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, chaseDistance);
         }
     }
 }
