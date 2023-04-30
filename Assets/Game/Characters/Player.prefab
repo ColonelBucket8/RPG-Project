@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: healthPoints
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: 3502450927586908765, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: maxSpeed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5509177005582210183, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: weaponDamage
       value: 10
