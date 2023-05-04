@@ -1321,6 +1321,7 @@ GameObject:
   - component: {fileID: 919933939}
   - component: {fileID: 919933941}
   - component: {fileID: 919933940}
+  - component: {fileID: 919933942}
   m_Layer: 5
   m_Name: Fader
   m_TagString: Untagged
@@ -1418,7 +1419,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919933934}
   m_Enabled: 1
-  m_Alpha: 0.39
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -1460,6 +1461,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 919933934}
   m_CullTransparentMesh: 1
+--- !u!114 &919933942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919933934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afaee36df3ca354780171856ea95aae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &944779041 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2413590664358304459, guid: e57eabded38881b48a76b6492ec15852, type: 3}
@@ -1759,7 +1772,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313439294}
-  m_LocalRotation: {x: 0.009460579, y: 0.98980355, z: -0.117828764, w: 0.07947222}
+  m_LocalRotation: {x: 0.00946058, y: 0.98980355, z: -0.117828764, w: 0.07947223}
   m_LocalPosition: {x: -18.690538, y: 13.83, z: 24.362394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
