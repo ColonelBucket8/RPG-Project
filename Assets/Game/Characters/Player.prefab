@@ -84,6 +84,10 @@ PrefabInstance:
       propertyPath: timeBetweenAttack
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7208335872203948753, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: uniqueIdentifier
+      value: player
+      objectReference: {fileID: 0}
     - target: {fileID: 7414127415572688888, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -143,18 +147,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7414127415572688892, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
   m_PrefabInstance: {fileID: 8383193095614774612}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7327977833094965900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1347508872533889704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0aeffc0a46ab293498cb9857ea7dc392, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!136 &876630349903283127
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,6 +161,18 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &7327977833094965900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347508872533889704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aeffc0a46ab293498cb9857ea7dc392, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1347508872533889708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7414127415572688888, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}

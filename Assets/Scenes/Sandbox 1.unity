@@ -1465,10 +1465,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 2.69
       objectReference: {fileID: 0}
-    - target: {fileID: 1700863011232823781, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
-      propertyPath: uniqueIdentifier
-      value: 9e6e8ad8-a6d5-4073-a354-c085567b971c
-      objectReference: {fileID: 0}
     - target: {fileID: 7411072645675359705, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.421734
@@ -1561,6 +1557,7 @@ GameObject:
   - component: {fileID: 1556284179}
   - component: {fileID: 1556284180}
   - component: {fileID: 1556284181}
+  - component: {fileID: 1556284182}
   m_Layer: 2
   m_Name: Intro Sequence
   m_TagString: Untagged
@@ -1661,6 +1658,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 265eb74e44f316c4c8245b81cacefd0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1556284182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1556284175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ea9374b509b70f4bba37e4a2ca8cf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uniqueIdentifier: 46f7c063-7b77-48c9-95ea-13fa9f399ed4
 --- !u!1001 &1723835682
 PrefabInstance:
   m_ObjectHideFlags: 0
