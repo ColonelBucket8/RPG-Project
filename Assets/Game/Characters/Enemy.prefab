@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 4774011373687742641, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: uniqueIdentifier
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 5509177005582210183, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: weaponDamage
       value: 10
