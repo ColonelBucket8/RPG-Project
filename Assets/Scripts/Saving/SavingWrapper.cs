@@ -5,6 +5,12 @@ namespace RPG.Saving
     public class SavingWrapper : MonoBehaviour
     {
         const string defaultSaveFile = "save";
+        SavingSystem savingSystem;
+
+        private void Awake()
+        {
+            savingSystem = GetComponent<SavingSystem>();
+        }
 
         private void Start()
         {
@@ -22,16 +28,26 @@ namespace RPG.Saving
             {
                 Load();
             }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Delete();
+            }
+        }
+
+        private void Delete()
+        {
+            savingSystem.Delete(defaultSaveFile);
         }
 
         public void Load()
         {
-            GetComponent<SavingSystem>().Load(defaultSaveFile);
+            savingSystem.Load(defaultSaveFile);
         }
 
         public void Save()
         {
-            GetComponent<SavingSystem>().Save(defaultSaveFile);
+            savingSystem.Save(defaultSaveFile);
         }
     }
 }
