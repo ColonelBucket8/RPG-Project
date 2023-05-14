@@ -1,7 +1,6 @@
-using RPG.Core;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace RPG.Saving
 {
@@ -17,17 +16,35 @@ namespace RPG.Saving
 
         public object CaptureState()
         {
+            Dictionary<string, object> state = new Dictionary<string, object>();
 
-            return new SerializableVector3(transform.position);
+            ISaveable[] collection = GetComponents<ISaveable>();
+
+            foreach (ISaveable saveable in collection)
+            {
+                string typeString = saveable.GetType().ToString();
+                state[typeString] = saveable.CaptureState();
+            }
+
+            return state;
         }
 
         public void RestoreState(object state)
         {
-            SerializableVector3 position = (SerializableVector3)state;
-            GetComponent<NavMeshAgent>().enabled = false;
-            transform.position = position.ToVector();
-            GetComponent<NavMeshAgent>().enabled = true;
-            GetComponent<ActionScheduler>().CancelCurrentAction();
+            Dictionary<string, object> stateDict = (Dictionary<string, object>)state;
+
+            ISaveable[] collection = GetComponents<ISaveable>();
+
+            foreach (ISaveable saveable in collection)
+            {
+                string typeString = saveable.GetType().ToString();
+
+                if (stateDict.ContainsKey(typeString))
+                {
+                    saveable.RestoreState(stateDict[typeString]);
+                }
+            }
+
         }
 
         // Remove update method from build
