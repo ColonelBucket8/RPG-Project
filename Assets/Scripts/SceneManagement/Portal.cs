@@ -52,6 +52,10 @@ namespace RPG.SceneManagement
             Portal otherPortal = GetOtherPortal(destination);
             UpdatePlayer(otherPortal);
 
+            // The second save to make sure player position is saved
+            // in the new scene
+            savingWrapper.Save();
+
             yield return new WaitForSeconds(fadeWaitTime);
             yield return fader.FadeIn(timeToFadeIn);
 
