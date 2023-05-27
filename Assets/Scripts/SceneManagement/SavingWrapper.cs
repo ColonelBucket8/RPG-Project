@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using RPG.Saving;
 using UnityEngine;
@@ -36,6 +37,16 @@ namespace RPG.SceneManagement
             {
                 Save();
             }
+
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                Delete();
+            }
+        }
+
+        private void Delete()
+        {
+            savingSystem.Delete(defaultSaveFile);
         }
 
         public void Load()
@@ -47,5 +58,6 @@ namespace RPG.SceneManagement
         {
             savingSystem.Save(defaultSaveFile);
         }
+
     }
 }
