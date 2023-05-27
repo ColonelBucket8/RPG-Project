@@ -8,7 +8,7 @@ namespace RPG.Combat
     {
         [SerializeField] float timeBetweenAttack = 1f;
         [SerializeField] Transform handTransform = null;
-        [SerializeField] Weapon weapon = null;
+        [SerializeField] Weapon defaultWeapon = null;
 
         Health target;
         Animator animator;
@@ -18,12 +18,14 @@ namespace RPG.Combat
 
         Mover mover;
 
+        Weapon currentWeapon = null;
+
         private void Start()
         {
             mover = GetComponent<Mover>();
             animator = GetComponent<Animator>();
 
-            SpawnWeapon();
+            EquipWeapon(defaultWeapon);
         }
 
         private void Update()
@@ -35,7 +37,7 @@ namespace RPG.Combat
 
             float distance = Vector3.Distance(transform.position, target.transform.position);
 
-            if (distance < weapon.GetWeaponRange())
+            if (distance < currentWeapon.GetWeaponRange())
             {
                 mover.Cancel();
                 AttackBehaviour();
@@ -47,13 +49,11 @@ namespace RPG.Combat
 
         }
 
-        private void SpawnWeapon()
+        public void EquipWeapon(Weapon weapon)
         {
-            if (weapon != null)
-            {
-                Animator animator = GetComponent<Animator>();
-                weapon.Spawn(handTransform, animator);
-            }
+            currentWeapon = weapon;
+            Animator animator = GetComponent<Animator>();
+            weapon.Spawn(handTransform, animator);
         }
 
         private void AttackBehaviour()
@@ -108,7 +108,7 @@ namespace RPG.Combat
         {
             if (target != null)
             {
-                target.TakeDamage(weapon.GetWeaponDamage());
+                target.TakeDamage(currentWeapon.GetWeaponDamage());
             }
         }
     }
