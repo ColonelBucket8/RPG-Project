@@ -1998,6 +1998,10 @@ PrefabInstance:
       propertyPath: uniqueIdentifier
       value: 1e087ae5-9969-49fc-a320-c534b3d6ee89
       objectReference: {fileID: 0}
+    - target: {fileID: 4481276608526611818, guid: b6972c7835af8a142a06795ec8cf4209, type: 3}
+      propertyPath: defaultWeapon
+      value: 
+      objectReference: {fileID: 11400000, guid: 599768d422c90dd4393cb791d939d4f1, type: 2}
     - target: {fileID: 8341395855033660949, guid: b6972c7835af8a142a06795ec8cf4209, type: 3}
       propertyPath: patrolPath
       value: 
