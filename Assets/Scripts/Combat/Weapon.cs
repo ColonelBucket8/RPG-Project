@@ -1,4 +1,3 @@
-using System;
 using RPG.Core;
 using UnityEngine;
 
@@ -88,6 +87,7 @@ namespace RPG.Combat
         public float GetWeaponRange()
         {
             return weaponRange;
+
         }
     }
 }

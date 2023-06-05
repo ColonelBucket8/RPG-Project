@@ -1429,7 +1429,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313439294}
-  m_LocalRotation: {x: 0.00946058, y: 0.98980355, z: -0.117828764, w: 0.07947223}
+  m_LocalRotation: {x: 0.009460579, y: 0.98980355, z: -0.117828764, w: 0.07947222}
   m_LocalPosition: {x: -18.690538, y: 13.83, z: 24.362394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1627,6 +1627,10 @@ PrefabInstance:
       propertyPath: defaultWeapon
       value: 
       objectReference: {fileID: 11400000, guid: da4da071b7765fa48bdc6c91d55fd836, type: 2}
+    - target: {fileID: 4604664405474701235, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
+      propertyPath: defaultWeaponName
+      value: Unarmed
+      objectReference: {fileID: 0}
     - target: {fileID: 7411072645675359705, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.421734
