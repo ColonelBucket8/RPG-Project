@@ -1,4 +1,3 @@
-using System;
 using RPG.Core;
 using UnityEngine;
 
@@ -8,6 +7,7 @@ namespace RPG.Combat
     {
         [SerializeField] float projectileSpeed = 8f;
         [SerializeField] bool isHoming = true;
+        [SerializeField] GameObject hitEffect = null;
 
         Health target = null;
         float damage = 0;
@@ -54,6 +54,10 @@ namespace RPG.Combat
             if (target.IsDead()) return;
 
             target.TakeDamage(damage);
+            if (hitEffect != null)
+            {
+                Instantiate(hitEffect, GetAimLocation(), transform.rotation);
+            }
             Destroy(gameObject);
         }
     }
