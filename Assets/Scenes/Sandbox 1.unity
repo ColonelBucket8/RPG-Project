@@ -1741,6 +1741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ca1a70a650354e49a4cc398ea22e98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isCinematicDisabled: 1
 --- !u!114 &1556284181
 MonoBehaviour:
   m_ObjectHideFlags: 0

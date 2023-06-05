@@ -7,6 +7,7 @@ namespace RPG.Cinematics
     public class CinematicTrigger : MonoBehaviour, ISaveable
     {
 
+        [SerializeField] bool isCinematicDisabled = false;
         bool hasTriggered = false;
 
         public object CaptureState()
@@ -21,7 +22,7 @@ namespace RPG.Cinematics
 
         private void OnTriggerEnter(Collider other)
         {
-            if (hasTriggered) return;
+            if (hasTriggered || isCinematicDisabled) return;
 
             if (other.CompareTag("Player"))
             {
