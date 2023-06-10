@@ -9,13 +9,16 @@ namespace RPG.Attributes
     {
         [SerializeField] float healthPoints = 20f;
 
+        BaseStats baseStats;
         bool isDead = false;
+
         CapsuleCollider capsuleCollider;
 
         private void Start()
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
-            healthPoints = GetComponent<BaseStats>().GetHealth();
+            baseStats = GetComponent<BaseStats>();
+            healthPoints = baseStats.GetHealth();
         }
 
         public bool IsDead()
@@ -35,6 +38,11 @@ namespace RPG.Attributes
                 Die();
             }
 
+        }
+
+        public float GetPercentage()
+        {
+            return 100 * (healthPoints / baseStats.GetHealth());
         }
 
         private void Die()
