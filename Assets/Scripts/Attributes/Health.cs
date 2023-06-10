@@ -1,7 +1,9 @@
+using RPG.Core;
 using RPG.Saving;
+using RPG.Stats;
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
@@ -13,6 +15,7 @@ namespace RPG.Core
         private void Start()
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
+            healthPoints = GetComponent<BaseStats>().GetHealth();
         }
 
         public bool IsDead()
