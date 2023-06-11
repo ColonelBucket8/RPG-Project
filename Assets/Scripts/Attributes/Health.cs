@@ -1,3 +1,4 @@
+using System;
 using RPG.Core;
 using RPG.Saving;
 using RPG.Stats;
@@ -26,16 +27,18 @@ namespace RPG.Attributes
             return isDead;
         }
 
-        public void TakeDamage(float damage)
+        public void TakeDamage(GameObject instigator, float damage)
         {
             // Avoid reducing health below than zero
             // If health minus damage is less than zero
             // take zero and assign it to health
             healthPoints = Mathf.Max(healthPoints - damage, 0);
 
+
             if (healthPoints == 0)
             {
                 Die();
+                AwardExperience(instigator);
             }
 
         }
@@ -61,6 +64,17 @@ namespace RPG.Attributes
                 capsuleCollider.enabled = false;
             }
 
+        }
+
+        private void AwardExperience(GameObject instigator)
+        {
+            Experience experience = instigator.GetComponent<Experience>();
+
+            if (experience)
+            {
+                float xp = baseStats.GetExperienceReward();
+                experience.GainExperience(xp);
+            }
         }
 
         public object CaptureState()
