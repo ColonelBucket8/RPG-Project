@@ -19,7 +19,7 @@ namespace RPG.Attributes
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
             baseStats = GetComponent<BaseStats>();
-            healthPoints = baseStats.GetHealth();
+            healthPoints = baseStats.GetStat(Stat.Health);
         }
 
         public bool IsDead()
@@ -45,7 +45,7 @@ namespace RPG.Attributes
 
         public float GetPercentage()
         {
-            return 100 * (healthPoints / baseStats.GetHealth());
+            return 100 * (healthPoints / baseStats.GetStat(Stat.Health));
         }
 
         private void Die()
@@ -72,7 +72,7 @@ namespace RPG.Attributes
 
             if (experience)
             {
-                float xp = baseStats.GetExperienceReward();
+                float xp = baseStats.GetStat(Stat.ExperienceReward);
                 experience.GainExperience(xp);
             }
         }
