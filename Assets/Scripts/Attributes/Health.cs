@@ -7,7 +7,7 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float healthPoints = 20f;
+        float healthPoints = -1f;
 
         BaseStats baseStats;
         bool isDead = false;
@@ -18,7 +18,11 @@ namespace RPG.Attributes
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
             baseStats = GetComponent<BaseStats>();
-            healthPoints = baseStats.GetStat(Stat.Health);
+
+            if (healthPoints < 0)
+            {
+                healthPoints = baseStats.GetStat(Stat.Health);
+            }
         }
 
         public bool IsDead()
