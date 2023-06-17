@@ -52,7 +52,23 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, GetLevel());
+            return progression.GetStat(stat, characterClass, GetLevel()) +
+                   GetAddictiveModifiers(stat);
+        }
+
+        private float GetAddictiveModifiers(Stat stat)
+        {
+            float sum = 0f;
+            foreach (IModifierProvider provider in
+                         GetComponents<IModifierProvider>())
+            {
+                foreach (float modifier in provider.GetAddictiveModifier(stat))
+                {
+                    sum += modifier;
+                }
+            }
+
+            return sum;
         }
 
         public int GetLevel()
@@ -65,7 +81,7 @@ namespace RPG.Stats
             return currentLevel;
         }
 
-        public int CalculateLevel()
+        private int CalculateLevel()
         {
             experience = GetComponent<Experience>();
 

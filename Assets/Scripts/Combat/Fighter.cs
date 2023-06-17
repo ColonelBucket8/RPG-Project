@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using RPG.Attributes;
 using RPG.Core;
 using RPG.Movement;
@@ -7,7 +8,7 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction, ISaveable
+    public class Fighter : MonoBehaviour, IAction, ISaveable, IModifierProvider
     {
         [SerializeField]
         float timeBetweenAttack = 1f;
@@ -151,6 +152,14 @@ namespace RPG.Combat
             string weaponName = (string)state;
             Weapon weapon = Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
+        }
+
+        public IEnumerable<float> GetAddictiveModifier(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.GetWeaponDamage();
+            }
         }
     }
 }
