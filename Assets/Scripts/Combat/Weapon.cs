@@ -3,19 +3,27 @@ using UnityEngine;
 
 namespace RPG.Combat
 {
-    [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon", order = 0)]
+    [CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Make New Weapon",
+                     order = 0)]
     public class Weapon : ScriptableObject
     {
-        [SerializeField] AnimatorOverrideController animatorOverride = null;
-        [SerializeField] GameObject equippedPrefab = null;
-        [SerializeField] float weaponDamage = 5f;
-        [SerializeField] float weaponRange = 2f;
-        [SerializeField] bool isRightHanded = true;
-        [SerializeField] Projectile projectile = null;
+        [SerializeField]
+        AnimatorOverrideController animatorOverride = null;
+        [SerializeField]
+        GameObject equippedPrefab = null;
+        [SerializeField]
+        float weaponDamage = 5f;
+        [SerializeField]
+        float weaponRange = 2f;
+        [SerializeField]
+        bool isRightHanded = true;
+        [SerializeField]
+        Projectile projectile = null;
 
         const string weaponName = "Weapon";
 
-        public void Spawn(Transform rightHand, Transform leftHand, Animator animator)
+        public void Spawn(Transform rightHand, Transform leftHand,
+                          Animator animator)
         {
             DestroyOldWeapon(rightHand, leftHand);
 
@@ -26,14 +34,16 @@ namespace RPG.Combat
                 weapon.name = weaponName;
             }
 
-            var overrideController = animator.runtimeAnimatorController as AnimatorOverrideController;
+            var overrideController =
+                animator.runtimeAnimatorController as AnimatorOverrideController;
             if (animatorOverride != null)
             {
                 animator.runtimeAnimatorController = animatorOverride;
             }
             else if (overrideController != null)
             {
-                animator.runtimeAnimatorController = overrideController.runtimeAnimatorController;
+                animator.runtimeAnimatorController =
+                    overrideController.runtimeAnimatorController;
             }
         }
 
@@ -45,20 +55,22 @@ namespace RPG.Combat
                 oldWeapon = leftHand.Find(weaponName);
             }
 
-            if (oldWeapon == null) return;
+            if (oldWeapon == null)
+                return;
 
             oldWeapon.name = "DESTROYING";
             Destroy(oldWeapon.gameObject);
         }
 
-        public bool HasProjectile()
-        {
-            return projectile != null;
-        }
+        public bool HasProjectile() { return projectile != null; }
 
-        public void LaunchProjectile(Transform rightHand, Transform leftHand, Health target, GameObject instigator)
+        public void LaunchProjectile(Transform rightHand, Transform leftHand,
+                                     Health target, GameObject instigator,
+                                     float calculateDamage)
         {
-            Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
+            Projectile projectileInstance =
+                Instantiate(projectile, GetTransform(rightHand, leftHand).position,
+                            Quaternion.identity);
             projectileInstance.SetTarget(target, instigator, weaponDamage);
         }
 
@@ -68,7 +80,6 @@ namespace RPG.Combat
             if (isRightHanded)
             {
                 handTransform = rightHand;
-
             }
             else
             {
@@ -78,16 +89,8 @@ namespace RPG.Combat
             return handTransform;
         }
 
+        public float GetWeaponDamage() { return weaponDamage; }
 
-        public float GetWeaponDamage()
-        {
-            return weaponDamage;
-        }
-
-        public float GetWeaponRange()
-        {
-            return weaponRange;
-
-        }
+        public float GetWeaponRange() { return weaponRange; }
     }
 }

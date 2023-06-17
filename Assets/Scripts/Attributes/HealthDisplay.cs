@@ -13,12 +13,12 @@ namespace RPG.Attributes
         {
             health = GameObject.FindWithTag("Player").GetComponent<Health>();
             textLabel = GetComponent<TextMeshProUGUI>();
-
         }
 
         private void Update()
         {
-            textLabel.text = String.Format("{0:0.0}%", health.GetPercentage());
+            textLabel.text = String.Format("{0:0}/{1:0}", health.GetHealthPoints(),
+                                           health.GetMaxHealthPoints());
         }
     }
 

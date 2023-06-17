@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 namespace RPG.Stats
 {
-    [CreateAssetMenu(fileName = "Progression", menuName = "Stats/New Progression", order = 0)]
+    [CreateAssetMenu(fileName = "Progression", menuName = "Stats/New Progression",
+                     order = 0)]
     public class Progression : ScriptableObject
     {
-        [SerializeField] ProgressionCharacterClass[] characterClasses = null;
+        [SerializeField]
+        ProgressionCharacterClass[] characterClasses = null;
 
         Dictionary<CharacterClass, Dictionary<Stat, float[]>> lookupTable = null;
 
@@ -17,10 +18,10 @@ namespace RPG.Stats
 
             float[] levels = lookupTable[characterClass][stat];
 
-            if (levels.Length < level) return 0;
+            if (levels.Length < level)
+                return 0;
 
             return levels[level - 1];
-
         }
 
         public int GetLevels(Stat stat, CharacterClass characterClass)
@@ -29,14 +30,15 @@ namespace RPG.Stats
 
             float[] levels = lookupTable[characterClass][stat];
             return levels.Length;
-
         }
 
         private void BuildLookup()
         {
-            if (lookupTable != null) return;
+            if (lookupTable != null)
+                return;
 
-            lookupTable = new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
+            lookupTable =
+                new Dictionary<CharacterClass, Dictionary<Stat, float[]>>();
 
             foreach (ProgressionCharacterClass progressionClass in characterClasses)
             {
@@ -48,7 +50,6 @@ namespace RPG.Stats
                 }
 
                 lookupTable[progressionClass.characterClass] = statLookupTable;
-
             }
         }
 
@@ -58,7 +59,6 @@ namespace RPG.Stats
             public CharacterClass characterClass;
             public ProgressionStat[] stats;
         }
-
 
         [System.Serializable]
         class ProgressionStat

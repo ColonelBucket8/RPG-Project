@@ -39,6 +39,8 @@ namespace RPG.Attributes
             // Avoid reducing health below than zero
             // If health minus damage is less than zero
             // take zero and assign it to health
+            print(gameObject.name + " took damage: " + damage);
+
             healthPoints = Mathf.Max(healthPoints - damage, 0);
 
             if (healthPoints == 0)
@@ -47,6 +49,10 @@ namespace RPG.Attributes
                 AwardExperience(instigator);
             }
         }
+
+        public float GetHealthPoints() { return healthPoints; }
+
+        public float GetMaxHealthPoints() { return baseStats.GetStat(Stat.Health); }
 
         public float GetPercentage()
         {

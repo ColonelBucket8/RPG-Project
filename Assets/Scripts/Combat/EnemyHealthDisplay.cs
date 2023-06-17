@@ -14,7 +14,6 @@ namespace RPG.Combat
         {
             target = GameObject.FindWithTag("Player").GetComponent<Fighter>();
             textLabel = GetComponent<TextMeshProUGUI>();
-
         }
 
         private void Update()
@@ -22,11 +21,13 @@ namespace RPG.Combat
             if (target.GetTarget() == null)
             {
                 textLabel.text = "N/A";
-
             }
             else
             {
-                textLabel.text = String.Format("{0:0.0}%", target.GetTarget().GetPercentage());
+                Health health = target.GetTarget();
+                textLabel.text =
+                    String.Format("{0:0}/{1:0}", health.GetHealthPoints(),
+                                  health.GetMaxHealthPoints());
             }
         }
     }
