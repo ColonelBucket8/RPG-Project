@@ -52,17 +52,37 @@ namespace RPG.Stats
 
         public float GetStat(Stat stat)
         {
-            return progression.GetStat(stat, characterClass, GetLevel()) +
-                   GetAddictiveModifiers(stat);
+            return (GetBaseStat(stat) + GetAddictiveModifier(stat)) *
+                   (1 + GetPercentageModifier(stat) / 100);
         }
 
-        private float GetAddictiveModifiers(Stat stat)
+        private float GetBaseStat(Stat stat)
+        {
+            return progression.GetStat(stat, characterClass, GetLevel());
+        }
+
+        private float GetAddictiveModifier(Stat stat)
         {
             float sum = 0f;
             foreach (IModifierProvider provider in
                          GetComponents<IModifierProvider>())
             {
-                foreach (float modifier in provider.GetAddictiveModifier(stat))
+                foreach (float modifier in provider.GetAddictiveModifiers(stat))
+                {
+                    sum += modifier;
+                }
+            }
+
+            return sum;
+        }
+
+        private float GetPercentageModifier(Stat stat)
+        {
+            float sum = 0f;
+            foreach (IModifierProvider provider in
+                         GetComponents<IModifierProvider>())
+            {
+                foreach (float modifier in provider.GetPercentageModifiers(stat))
                 {
                     sum += modifier;
                 }
