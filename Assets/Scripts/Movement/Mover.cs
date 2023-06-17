@@ -8,13 +8,15 @@ namespace RPG.Movement
 {
     public class Mover : MonoBehaviour, IAction, ISaveable
     {
-        [SerializeField] Transform target;
-        [SerializeField] float maxSpeed = 6f;
+        [SerializeField]
+        Transform target;
+        [SerializeField]
+        float maxSpeed = 6f;
 
         NavMeshAgent navMeshAgent;
         Health health;
 
-        private void Start()
+        private void Awake()
         {
             navMeshAgent = GetComponent<NavMeshAgent>();
             health = GetComponent<Health>();
@@ -38,13 +40,9 @@ namespace RPG.Movement
 
             float speed = localVelocity.z;
             GetComponent<Animator>().SetFloat("forwardSpeed", speed);
-
         }
 
-        public void Cancel()
-        {
-            navMeshAgent.isStopped = true;
-        }
+        public void Cancel() { navMeshAgent.isStopped = true; }
 
         public void MoveTo(Vector3 destination, float speedFraction)
         {
@@ -83,11 +81,10 @@ namespace RPG.Movement
             MoverSaveData data = (MoverSaveData)state;
 
             // Stop NavMeshAgent interference
-            GetComponent<NavMeshAgent>().enabled = false;
+            navMeshAgent.enabled = false;
             transform.position = data.position.ToVector();
             transform.eulerAngles = data.rotation.ToVector();
-            GetComponent<NavMeshAgent>().enabled = true;
-
+            navMeshAgent.enabled = true;
         }
     }
 }
