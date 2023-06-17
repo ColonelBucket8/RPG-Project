@@ -7,8 +7,10 @@ namespace RPG.Attributes
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        float healthPoints = -1f;
+        [SerializeField]
+        float regenerationPercentage = 70f;
 
+        float healthPoints = -1f;
         BaseStats baseStats;
         bool isDead = false;
 
@@ -23,12 +25,14 @@ namespace RPG.Attributes
             {
                 healthPoints = baseStats.GetStat(Stat.Health);
             }
+
+            if (baseStats)
+            {
+                baseStats.onLevelUp += RegenerateHealth;
+            }
         }
 
-        public bool IsDead()
-        {
-            return isDead;
-        }
+        public bool IsDead() { return isDead; }
 
         public void TakeDamage(GameObject instigator, float damage)
         {
@@ -37,13 +41,11 @@ namespace RPG.Attributes
             // take zero and assign it to health
             healthPoints = Mathf.Max(healthPoints - damage, 0);
 
-
             if (healthPoints == 0)
             {
                 Die();
                 AwardExperience(instigator);
             }
-
         }
 
         public float GetPercentage()
@@ -51,9 +53,18 @@ namespace RPG.Attributes
             return 100 * (healthPoints / baseStats.GetStat(Stat.Health));
         }
 
+        public void RegenerateHealth()
+        {
+            float regenHealthPoints =
+                baseStats.GetStat(Stat.Health) * (regenerationPercentage / 100);
+
+            healthPoints = Mathf.Max(healthPoints, regenHealthPoints);
+        }
+
         private void Die()
         {
-            if (isDead) return;
+            if (isDead)
+                return;
 
             GetComponent<Animator>().SetTrigger("die");
             GetComponent<ActionScheduler>().CancelCurrentAction();
@@ -66,7 +77,6 @@ namespace RPG.Attributes
             {
                 capsuleCollider.enabled = false;
             }
-
         }
 
         private void AwardExperience(GameObject instigator)

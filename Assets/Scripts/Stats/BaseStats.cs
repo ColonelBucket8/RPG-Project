@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace RPG.Stats
@@ -6,12 +7,19 @@ namespace RPG.Stats
     public class BaseStats : MonoBehaviour
     {
         [Range(1, 99)]
-        [SerializeField] int startingLevel = 1;
-        [SerializeField] CharacterClass characterClass;
-        [SerializeField] Progression progression = null;
+        [SerializeField]
+        int startingLevel = 1;
+        [SerializeField]
+        CharacterClass characterClass;
+        [SerializeField]
+        Progression progression = null;
+        [SerializeField]
+        GameObject levelUpParticleEffect = null;
 
         Experience experience;
         int currentLevel = 0;
+
+        public event Action onLevelUp;
 
         private void Start()
         {
@@ -32,8 +40,14 @@ namespace RPG.Stats
             if (newLevel > currentLevel)
             {
                 currentLevel = newLevel;
-                print("Levelled up!");
+                LevelUpEffect();
+                onLevelUp();
             }
+        }
+
+        private void LevelUpEffect()
+        {
+            Instantiate(levelUpParticleEffect, transform);
         }
 
         public float GetStat(Stat stat)
@@ -51,19 +65,21 @@ namespace RPG.Stats
             return currentLevel;
         }
 
-
         public int CalculateLevel()
         {
             experience = GetComponent<Experience>();
 
-            if (experience == null) return startingLevel;
+            if (experience == null)
+                return startingLevel;
 
             float currentXP = GetComponent<Experience>().GetPoints();
-            int penultimateLevel = progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
+            int penultimateLevel =
+                progression.GetLevels(Stat.ExperienceToLevelUp, characterClass);
 
             for (int level = 1; level < penultimateLevel; level++)
             {
-                float xPToLevelUp = progression.GetStat(Stat.ExperienceToLevelUp, characterClass, level);
+                float xPToLevelUp = progression.GetStat(Stat.ExperienceToLevelUp,
+                                                        characterClass, level);
                 if (xPToLevelUp > currentXP)
                 {
                     return level;
@@ -72,6 +88,5 @@ namespace RPG.Stats
 
             return penultimateLevel + 1;
         }
-
     }
 }
