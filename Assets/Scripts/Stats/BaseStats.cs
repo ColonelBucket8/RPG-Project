@@ -15,6 +15,8 @@ namespace RPG.Stats
         Progression progression = null;
         [SerializeField]
         GameObject levelUpParticleEffect = null;
+        [SerializeField]
+        bool shouldUseModifiers = false;
 
         Experience experience;
         int currentLevel = 0;
@@ -63,6 +65,9 @@ namespace RPG.Stats
 
         private float GetAddictiveModifier(Stat stat)
         {
+            if (!shouldUseModifiers)
+                return 0;
+
             float sum = 0f;
             foreach (IModifierProvider provider in
                          GetComponents<IModifierProvider>())
@@ -78,6 +83,9 @@ namespace RPG.Stats
 
         private float GetPercentageModifier(Stat stat)
         {
+            if (!shouldUseModifiers)
+                return 0;
+
             float sum = 0f;
             foreach (IModifierProvider provider in
                          GetComponents<IModifierProvider>())
