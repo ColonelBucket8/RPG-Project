@@ -16,10 +16,16 @@ namespace RPG.Cinematics
             player = GameObject.FindWithTag("Player");
         }
 
-        private void Start()
+        private void onEnable()
         {
             playableDirector.played += DisableControl;
             playableDirector.stopped += EnableControl;
+        }
+
+        private void onDisable()
+        {
+            playableDirector.played -= DisableControl;
+            playableDirector.stopped -= EnableControl;
         }
 
         void DisableControl(PlayableDirector pd)
@@ -32,6 +38,5 @@ namespace RPG.Cinematics
         {
             player.GetComponent<PlayerController>().enabled = true;
         }
-
     }
 }

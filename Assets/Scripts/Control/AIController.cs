@@ -8,13 +8,19 @@ namespace RPG.Control
 {
     public class AIController : MonoBehaviour
     {
-        [SerializeField] float chaseDistance = 5f;
-        [SerializeField] float suspicionTime = 5f;
-        [SerializeField] float waypointDwellTime = 1f;
-        [SerializeField] PatrolPath patrolPath;
-        [SerializeField] float waypointTolerance = 1f;
+        [SerializeField]
+        float chaseDistance = 5f;
+        [SerializeField]
+        float suspicionTime = 5f;
+        [SerializeField]
+        float waypointDwellTime = 1f;
+        [SerializeField]
+        PatrolPath patrolPath;
+        [SerializeField]
+        float waypointTolerance = 1f;
         [Range(0f, 1f)]
-        [SerializeField] float patrolSpeedFraction = 0.2f;
+        [SerializeField]
+        float patrolSpeedFraction = 0.2f;
 
         Fighter fighter;
         GameObject player;
@@ -26,19 +32,20 @@ namespace RPG.Control
         float timeSinceArrivedAtWaypoint = Mathf.Infinity;
         int currentWaypointIndex = 0;
 
-        private void Start()
+        private void Awake()
         {
             fighter = GetComponent<Fighter>();
             player = GameObject.FindWithTag("Player");
             health = GetComponent<Health>();
             mover = GetComponent<Mover>();
-
-            guardPosition = transform.position;
         }
+
+        private void Start() { guardPosition = transform.position; }
 
         private void Update()
         {
-            if (health.IsDead()) return;
+            if (health.IsDead())
+                return;
 
             if (DistanceToPlayer() < chaseDistance && fighter.CanAttack(player))
             {
@@ -57,7 +64,6 @@ namespace RPG.Control
             }
 
             UpdateTimers();
-
         }
 
         private void UpdateTimers()
@@ -99,7 +105,8 @@ namespace RPG.Control
 
         private bool AtWaypoint()
         {
-            float distance = Vector3.Distance(transform.position, GetCurrentWaypoint());
+            float distance =
+                Vector3.Distance(transform.position, GetCurrentWaypoint());
             return distance < waypointTolerance;
         }
 

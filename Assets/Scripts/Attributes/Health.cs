@@ -16,21 +16,23 @@ namespace RPG.Attributes
 
         CapsuleCollider capsuleCollider;
 
-        private void Start()
+        private void Awake()
         {
             capsuleCollider = GetComponent<CapsuleCollider>();
             baseStats = GetComponent<BaseStats>();
+        }
 
+        private void Start()
+        {
             if (healthPoints < 0)
             {
                 healthPoints = baseStats.GetStat(Stat.Health);
             }
-
-            if (baseStats)
-            {
-                baseStats.onLevelUp += RegenerateHealth;
-            }
         }
+
+        private void OnEnable() { baseStats.onLevelUp += RegenerateHealth; }
+
+        private void OnDisable() { baseStats.onLevelUp -= RegenerateHealth; }
 
         public bool IsDead() { return isDead; }
 
