@@ -1,3 +1,4 @@
+using System;
 using RPG.Attributes;
 using RPG.Combat;
 using RPG.Movement;
@@ -12,6 +13,23 @@ namespace RPG.Control
         Fighter fighter;
         Health health;
 
+        enum CursorType
+        {
+            None,
+            Movement,
+            Combat
+        }
+
+        [System.Serializable]
+        struct CursorMapping
+        {
+            public CursorType type;
+            public Texture2D texture;
+            public Vector2 hotspot;
+        }
+
+        [SerializeField]
+        CursorMapping[] cursorMappings = null;
 
         /// <summary>
         /// Handle combat and movement.
@@ -27,7 +45,8 @@ namespace RPG.Control
 
         private void Update()
         {
-            if (health.IsDead()) return;
+            if (health.IsDead())
+                return;
 
             // Action Priority
             if (InteractWithCombat())
@@ -39,6 +58,8 @@ namespace RPG.Control
             {
                 return;
             }
+
+            SetCursor(CursorType.None);
         }
 
         private bool InteractWithCombat()
@@ -49,14 +70,13 @@ namespace RPG.Control
             {
                 CombatTarget target = hit.transform.GetComponent<CombatTarget>();
 
-                if (target == null) continue;
-
+                if (target == null)
+                    continue;
 
                 if (!fighter.CanAttack(target.gameObject))
                 {
                     continue;
                 }
-
 
                 if (Input.GetMouseButton(0))
                 {
@@ -65,6 +85,7 @@ namespace RPG.Control
 
                 // Put return outside to get the value when hovering on the enemy
                 // To get mouse cursor interaction
+                SetCursor(CursorType.Combat);
                 return true;
             }
             return false;
@@ -80,10 +101,31 @@ namespace RPG.Control
                 {
                     mover.StartMoveAction(hit.point, 1f);
                 }
+                SetCursor(CursorType.Movement);
                 return true;
             }
 
             return false;
+        }
+
+        private void SetCursor(CursorType combat)
+        {
+            CursorMapping mapping = GetCursorMapping(combat);
+
+            Cursor.SetCursor(mapping.texture, mapping.hotspot, CursorMode.Auto);
+        }
+
+        private CursorMapping GetCursorMapping(CursorType cursorType)
+        {
+            foreach (CursorMapping mapping in cursorMappings)
+            {
+                if (mapping.type == cursorType)
+                {
+                    return mapping;
+                }
+            }
+
+            return new CursorMapping();
         }
 
         private static Ray GetMouseRay()
