@@ -57,13 +57,34 @@ namespace RPG.Control
             }
 
             // Action Priority
-            if (InteractWithCombat())
+            if (InteractWithComponent())
                 return;
 
             if (InteractWithMovement())
                 return;
 
             SetCursor(CursorType.None);
+        }
+
+        private bool InteractWithComponent()
+        {
+            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
+            foreach (RaycastHit hit in hits)
+            {
+                IRaycastable[] raycastables =
+                    hit.transform.GetComponents<IRaycastable>();
+
+                foreach (IRaycastable raycastable in raycastables)
+                {
+                    if (raycastable.HandleRaycast(this))
+                    {
+                        SetCursor(CursorType.Combat);
+                        return true;
+                    }
+                }
+            }
+
+            return false;
         }
 
         private bool InteractWithUI()
@@ -74,35 +95,6 @@ namespace RPG.Control
                 return true;
             }
 
-            return false;
-        }
-
-        private bool InteractWithCombat()
-        {
-            RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
-
-            foreach (RaycastHit hit in hits)
-            {
-                CombatTarget target = hit.transform.GetComponent<CombatTarget>();
-
-                if (target == null)
-                    continue;
-
-                if (!fighter.CanAttack(target.gameObject))
-                {
-                    continue;
-                }
-
-                if (Input.GetMouseButton(0))
-                {
-                    fighter.Attack(target.gameObject);
-                }
-
-                // Put return outside to get the value when hovering on the enemy
-                // To get mouse cursor interaction
-                SetCursor(CursorType.Combat);
-                return true;
-            }
             return false;
         }
 
