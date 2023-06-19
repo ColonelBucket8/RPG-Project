@@ -106,6 +106,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 110537202294807168, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2279450527215681897, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: healthPoints
       value: 200
@@ -113,6 +117,10 @@ PrefabInstance:
     - target: {fileID: 3502450927586908765, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: maxSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4221680990024817398, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5509177005582210183, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
       propertyPath: weapon
@@ -280,6 +288,8 @@ MonoBehaviour:
   - type: 4
     texture: {fileID: 2800000, guid: f8c873f1e53e83f4aabf342d6be1dfc3, type: 3}
     hotspot: {x: 0, y: 0}
+  maxNavMeshProjectionDistance: 1
+  maxNavPathLength: 40
 --- !u!4 &1347508872533889708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7414127415572688888, guid: 7778b8a744be795479a0ba9bf1e82a75, type: 3}
