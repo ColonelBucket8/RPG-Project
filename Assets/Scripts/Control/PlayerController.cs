@@ -25,9 +25,10 @@ namespace RPG.Control
 
         [SerializeField]
         CursorMapping[] cursorMappings = null;
-
         [SerializeField]
         float maxNavMeshProjectionDistance = 1f;
+        [SerializeField]
+        float maxNavPathLength = 40f;
 
         /// <summary>
         /// Handle combat and movement.
@@ -147,7 +148,39 @@ namespace RPG.Control
                 return false;
 
             target = navMeshHit.position;
+
+            NavMeshPath path = new NavMeshPath();
+            bool hasPath = NavMesh.CalculatePath(transform.position, target,
+                                                 NavMesh.AllAreas, path);
+
+            if (!hasPath)
+                return false;
+
+            if (path.status != NavMeshPathStatus.PathComplete)
+                return false;
+
+            if (GetPathLength(path) > maxNavPathLength)
+                return false;
+
             return true;
+        }
+
+        private float GetPathLength(NavMeshPath path)
+        {
+            Vector3[] corners = path.corners;
+
+            float sum = 0f;
+
+            if (corners.Length < 2)
+                return sum;
+
+            for (int i = 0; i < corners.Length - 1; i++)
+            {
+                float distance = Vector3.Distance(corners[i], corners[i + 1]);
+                sum += distance;
+            }
+
+            return sum;
         }
 
         private void SetCursor(CursorType combat)
