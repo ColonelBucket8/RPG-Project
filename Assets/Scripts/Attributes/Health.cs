@@ -12,7 +12,7 @@ namespace RPG.Attributes
         [SerializeField]
         float regenerationPercentage = 70f;
         [SerializeField]
-        UnityEvent takeDamage;
+        UnityEvent<float> takeDamage;
 
         LazyValue<float> healthPoints;
         BaseStats baseStats;
@@ -51,7 +51,7 @@ namespace RPG.Attributes
                 AwardExperience(instigator);
             }
 
-            takeDamage.Invoke();
+            takeDamage.Invoke(damage);
         }
 
         public float GetHealthPoints() { return healthPoints.value; }
