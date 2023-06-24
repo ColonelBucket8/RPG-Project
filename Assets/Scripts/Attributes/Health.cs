@@ -58,9 +58,11 @@ namespace RPG.Attributes
 
         public float GetMaxHealthPoints() { return baseStats.GetStat(Stat.Health); }
 
-        public float GetPercentage()
+        public float GetPercentage() { return 100 * GetFraction(); }
+
+        public float GetFraction()
         {
-            return 100 * (healthPoints.value / baseStats.GetStat(Stat.Health));
+            return healthPoints.value / baseStats.GetStat(Stat.Health);
         }
 
         public void RegenerateHealth()
