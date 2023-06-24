@@ -1,4 +1,5 @@
 using System.Collections;
+using RPG.Control;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
@@ -10,15 +11,25 @@ namespace RPG.SceneManagement
 
         enum DestinationIdentifier
         {
-            A, B, C, D, E
+            A,
+            B,
+            C,
+            D,
+            E
         }
 
-        [SerializeField] int sceneToLoad = -1;
-        [SerializeField] Transform spawnPoint;
-        [SerializeField] DestinationIdentifier destination;
-        [SerializeField] private float timeToFadeOut = 3f;
-        [SerializeField] private float timeToFadeIn = 1f;
-        [SerializeField] private float fadeWaitTime = 0.5f;
+        [SerializeField]
+        int sceneToLoad = -1;
+        [SerializeField]
+        Transform spawnPoint;
+        [SerializeField]
+        DestinationIdentifier destination;
+        [SerializeField]
+        private float timeToFadeOut = 3f;
+        [SerializeField]
+        private float timeToFadeIn = 1f;
+        [SerializeField]
+        private float fadeWaitTime = 0.5f;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -39,6 +50,11 @@ namespace RPG.SceneManagement
             DontDestroyOnLoad(gameObject);
 
             Fader fader = FindObjectOfType<Fader>();
+
+            PlayerController playerController =
+                GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            playerController.enabled = false;
+
             yield return fader.FadeOut(timeToFadeOut);
 
             // Save current level
@@ -46,6 +62,11 @@ namespace RPG.SceneManagement
             savingWrapper.Save();
 
             yield return SceneManager.LoadSceneAsync(sceneToLoad);
+
+            // Getting new player tag after loading new scene
+            PlayerController newPlayerController =
+                GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+            newPlayerController.enabled = false;
 
             // Load current level
             savingWrapper.Load();
@@ -56,7 +77,9 @@ namespace RPG.SceneManagement
             savingWrapper.Save();
 
             yield return new WaitForSeconds(fadeWaitTime);
-            yield return fader.FadeIn(timeToFadeIn);
+            fader.FadeIn(timeToFadeIn);
+
+            newPlayerController.enabled = true;
 
             Destroy(gameObject);
         }
