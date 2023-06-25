@@ -43,7 +43,6 @@ namespace RPG.Attributes
             // Avoid reducing health below than zero
             // If health minus damage is less than zero
             // take zero and assign it to health
-            print(gameObject.name + " took damage: " + damage);
 
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
 
@@ -119,6 +118,12 @@ namespace RPG.Attributes
             {
                 Die();
             }
+        }
+
+        public void Heal(float amount)
+        {
+            healthPoints.value =
+                Mathf.Min(healthPoints.value + amount, GetMaxHealthPoints());
         }
     }
 }
