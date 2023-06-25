@@ -1366,7 +1366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1313439294}
-  m_LocalRotation: {x: 0.009460579, y: 0.98980355, z: -0.117828764, w: 0.07947222}
+  m_LocalRotation: {x: 0.00946058, y: 0.98980355, z: -0.117828764, w: 0.07947223}
   m_LocalPosition: {x: -18.690538, y: 13.83, z: 24.362394}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1503,17 +1503,6 @@ Transform:
   m_Father: {fileID: 95727116}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1516379072 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7411072646589547270, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
-  m_PrefabInstance: {fileID: 1555013451}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1528995020
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,6 +1541,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 360089931877980162, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 17.421734
+      objectReference: {fileID: 0}
+    - target: {fileID: 360089931877980162, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.8899975
+      objectReference: {fileID: 0}
+    - target: {fileID: 360089931877980162, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.4743843
+      objectReference: {fileID: 0}
     - target: {fileID: 1497664918262890180, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
       propertyPath: level
       value: 5
@@ -1638,11 +1639,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7411072646589547267, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.421734
+      value: 12.461735
       objectReference: {fileID: 0}
     - target: {fileID: 7411072646589547267, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.8899975
+      value: 7.199996
       objectReference: {fileID: 0}
     - target: {fileID: 7411072646589547267, guid: ea59aca07d282a14fbfd77d02af182b3, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1703,7 +1704,7 @@ PlayableDirector:
   m_InitialTime: 0
   m_SceneBindings:
   - key: {fileID: 135318559645627574, guid: 325fcb6f9306d7d44a8e5722fb117ad9, type: 2}
-    value: {fileID: 1516379072}
+    value: {fileID: 0}
   - key: {fileID: 2192492587274041869, guid: 325fcb6f9306d7d44a8e5722fb117ad9, type: 2}
     value: {fileID: 1313439297}
   m_ExposedReferences:

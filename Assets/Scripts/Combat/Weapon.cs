@@ -1,10 +1,15 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace RPG.Combat
 {
+
     public class Weapon : MonoBehaviour
     {
-        public void OnHit() { print("Weapon hit " + gameObject.name); }
+        [SerializeField]
+        UnityEvent onHit;
+
+        public void OnHit() { onHit.Invoke(); }
     }
 
 }
