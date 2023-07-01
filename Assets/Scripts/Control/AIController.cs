@@ -1,3 +1,4 @@
+using System;
 using GameDevTV.Utils;
 using RPG.Attributes;
 using RPG.Combat;
@@ -24,6 +25,8 @@ namespace RPG.Control
         [Range(0f, 1f)]
         [SerializeField]
         float patrolSpeedFraction = 0.2f;
+        [SerializeField]
+        float shoutDistance = 5.0f;
 
         Fighter fighter;
         GameObject player;
@@ -129,6 +132,23 @@ namespace RPG.Control
         {
             timeSinceLastSawPlayer = 0f;
             fighter.Attack(player);
+            AggrevateNearbyEnemies();
+        }
+
+        private void AggrevateNearbyEnemies()
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position,
+                                                      shoutDistance, Vector3.up, 0);
+
+            foreach (RaycastHit hit in hits)
+            {
+                AIController ai = hit.transform.GetComponent<AIController>();
+
+                if (ai != null)
+                {
+                    ai.Aggrevate();
+                }
+            }
         }
 
         private bool IsAggrevated()
