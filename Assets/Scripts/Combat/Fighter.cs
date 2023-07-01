@@ -54,10 +54,7 @@ namespace RPG.Combat
             if (target.IsDead())
                 return;
 
-            float distance =
-                Vector3.Distance(transform.position, target.transform.position);
-
-            if (distance < currentWeaponConfig.GetWeaponRange())
+            if (GetIsInRange(target.transform))
             {
                 mover.Cancel();
                 AttackBehaviour();
@@ -66,6 +63,12 @@ namespace RPG.Combat
             {
                 mover.MoveTo(target.transform.position, 1f);
             }
+        }
+
+        private bool GetIsInRange(Transform targetTransform)
+        {
+            return Vector3.Distance(transform.position, targetTransform.position) <
+                   currentWeaponConfig.GetWeaponRange();
         }
 
         public void EquipWeapon(WeaponConfig weapon)
@@ -104,7 +107,8 @@ namespace RPG.Combat
             if (combatTarget == null)
                 return false;
 
-            if (!mover.CanMoveTo(combatTarget.transform.position))
+            if (!mover.CanMoveTo(combatTarget.transform.position) &&
+                !GetIsInRange(combatTarget.transform))
                 return false;
 
             Health targetToTest = combatTarget.GetComponent<Health>();
